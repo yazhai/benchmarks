@@ -8,7 +8,7 @@ command="dreal  ${@:2}  $1 > $out_tmp 2>&1"
 
 # Define timeout
 if [ -z "$TIMEOUT" ] ; then
-    TIMEOUT=1
+    TIMEOUT=600
 fi
 timeout_command="timeout $TIMEOUT $command"
 
