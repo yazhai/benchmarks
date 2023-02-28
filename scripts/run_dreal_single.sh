@@ -52,5 +52,5 @@ fi
 
 
 # Output
-echo $sat_answer "    "  $time_elapsed 
+echo $1 "    "   $sat_answer "    "  $time_elapsed 
 

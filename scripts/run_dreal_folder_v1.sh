@@ -6,14 +6,10 @@
 folder=$1
 args=${@:2}
 
-# Run dreal on all files in the folder in parallel
-ls $1/*.smt2 | parallel "./run_dreal_single.sh {} $args"
-
-# The results have been printed. Now we need to sort them by file name
-# Run again to get the results in the correct order
 output_file=results_$(basename $1).txt
 echo "#FileName    SatAnswer    Time[s]  ###results_by_command dreal $args" > $output_file
+
 for file in $(ls $1/*.smt2)
 do 
-    ./run_dreal_single.sh $file $args >> $output_file 
+    ./run_dreal_single.sh $file $args | xargs -I sat_and_time echo $file "    " sat_and_time >> $output_file 
 done
