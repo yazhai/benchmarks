@@ -14,7 +14,9 @@ mkdir -p ${dir_tmp}
 if [ -z "$TIMEOUT" ] ; then
     TIMEOUT=600
 fi
-timeout_command="timeout $TIMEOUT $command"
+# Use timeout command with "SIGINT" to interrupt the command
+timeout_command="timeout -s SIGINT $TIMEOUT $command"
+
 
 
 # Define results
@@ -33,12 +35,15 @@ if [ ! -e $out_tmp ] ; then
 fi
 
 
-
-
 # Retrieve time
 minutes_elapsed=$(cat $out_tmp | grep -P "real\t" | cut -d 'm' -f 1 | awk '{print($NF)}' )
 seconds_elapsed=$(cat $out_tmp | grep -P "real\t" | cut -d 'm' -f 2 | cut -d 's' -f 1)
 time_elapsed=$(echo "$minutes_elapsed * 60 + $seconds_elapsed" | bc)
+
+# If no time read, set to default value
+if [ -z "$time_elapsed" ] ; then
+    time_elapsed=$TIMEOUT
+fi
 
 
 # Retrieve answer
