@@ -12,14 +12,21 @@ Output tmp file is saved in `./FOLDER/*.smt2.tmp` where `FOLDER` is the folder n
 
 Use the following command to run dreal on all files in a folder:
 
-    export TIMEOUT=<seconds>; ./run_dreal_folder.sh <folder> <options>
+    export TIMEOUT=<seconds>; ./run_dreal_multiple.sh <folder> <options>
 
 Run dreal on all files in <folder> with <options> and output the results to output_summary.txt
+
 Maximum time for each run is set by TIMEOUT
 
 With `nohup` and `&` you can run it in the background.
 
-    nohup bash -c 'export TIMEOUT=<seconds> && ./run_dreal_folder.sh <folder> <options>' &
+    nohup bash -c 'export TIMEOUT=<seconds> && ./run_dreal_multiple.sh <folder> <options>' &
+
+# Run dreall on all files listed in a file
+
+Use the following command to run dreal on all files listed in a file:
+
+    export TIMEOUT=<seconds>; ./run_dreal_multiple.sh <file> <options>
 
 # Read expected results
 
